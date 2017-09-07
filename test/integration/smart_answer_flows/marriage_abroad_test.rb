@@ -7,10 +7,10 @@ class MarriageAbroadTest < ActiveSupport::TestCase
   include FlowTestHelper
 
   FLATTEN_COUNTRIES_2_OUTCOMES = %w(china cyprus egypt france ireland italy luxembourg philippines thailand turkey usa).freeze
-  FLATTEN_COUNTRIES_6_OUTCOMES = %w(poland greece).freeze
+  FLATTEN_COUNTRIES_6_OUTCOMES = %w(poland greece spain).freeze
   FLATTEN_COUNTRIES_18_OUTCOMES = %w(algeria azerbaijan brazil british-indian-ocean-territory burma cambodia chile colombia denmark el-salvador gambia germany hungary indonesia iran japan jordan latvia maldives moldova mozambique nicaragua portugal romania south-africa sweden tanzania tunisia vietnam).freeze
   FLATTEN_COUNTRIES = FLATTEN_COUNTRIES_2_OUTCOMES + FLATTEN_COUNTRIES_6_OUTCOMES + FLATTEN_COUNTRIES_18_OUTCOMES
-  NOT_FLATTEN_COUNTRIES = %w(albania american-samoa anguilla argentina armenia aruba australia austria bahamas belarus belgium bonaire-st-eustatius-saba burundi canada costa-rica cote-d-ivoire croatia czech-republic democratic-republic-of-the-congo ecuador estonia finland hong-kong kazakhstan kosovo kyrgyzstan laos lebanon lithuania macao macedonia malta mayotte mexico monaco montenegro morocco netherlands north-korea norway oman guatemala paraguay peru qatar russia rwanda saint-barthelemy san-marino saudi-arabia serbia seychelles slovakia slovenia somalia st-maarten st-martin south-korea spain switzerland turkmenistan ukraine united-arab-emirates uzbekistan wallis-and-futuna yemen zimbabwe).freeze
+  NOT_FLATTEN_COUNTRIES = %w(albania american-samoa anguilla argentina armenia aruba australia austria bahamas belarus belgium bonaire-st-eustatius-saba burundi canada costa-rica cote-d-ivoire croatia czech-republic democratic-republic-of-the-congo ecuador estonia finland hong-kong kazakhstan kosovo kyrgyzstan laos lebanon lithuania macao macedonia malta mayotte mexico monaco montenegro morocco netherlands north-korea norway oman guatemala paraguay peru qatar russia rwanda saint-barthelemy san-marino saudi-arabia serbia seychelles slovakia slovenia somalia st-maarten st-martin south-korea switzerland turkmenistan ukraine united-arab-emirates uzbekistan wallis-and-futuna yemen zimbabwe).freeze
 
   def self.translations
     @translations ||= YAML.load_file("lib/smart_answer_flows/locales/en/marriage-abroad.yml")
@@ -271,7 +271,6 @@ class MarriageAbroadTest < ActiveSupport::TestCase
   end
 
   #variants for uk residency (again)
-
   #variant for uk resident
   context "ceremony in guatemala, resident in wales, partner other" do
     setup do
@@ -290,70 +289,6 @@ class MarriageAbroadTest < ActiveSupport::TestCase
     end
   end
   #variant for local resident
-
-  context "Spain" do
-    setup do
-      add_response 'spain'
-    end
-
-    context "resident in uk, partner british, opposite sex" do
-      setup do
-        add_response 'uk'
-        add_response 'partner_british'
-        add_response 'opposite_sex'
-      end
-      should "go to outcome_ceremonies_in_spain with UK/OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-
-    context "resident in spain, partner local" do
-      setup do
-        add_response 'ceremony_country'
-        add_response 'partner_local'
-        add_response 'opposite_sex'
-      end
-      should "go to outcome_ceremonies_in_spain with ceremony country OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-
-    context "lives elsewhere, partner opposite sex other" do
-      setup do
-        add_response 'third_country'
-        add_response 'partner_other'
-        add_response 'opposite_sex'
-      end
-
-      should "go to outcome_ceremonies_in_spain with third country OS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-
-    context "resident in england, partner british, same sex" do
-      setup do
-        add_response 'uk'
-        add_response 'partner_british'
-        add_response 'same_sex'
-      end
-
-      should "go to outcome_ceremonies_in_spain with UK/SS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-
-    context "lives elsewhere, partner same sex other" do
-      setup do
-        add_response 'third_country'
-        add_response 'partner_other'
-        add_response 'same_sex'
-      end
-
-      should "go to outcome_ceremonies_in_spain with third country SS specific phrases" do
-        assert_current_node :outcome_marriage_abroad_in_country
-      end
-    end
-  end
 
   context "ceremony in belgium, lives in 3rd country, partner british" do
     setup do
