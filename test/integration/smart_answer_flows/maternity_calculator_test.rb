@@ -282,6 +282,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                       should "ask for the next pay date if pay frequency is fortnightly" do
                         add_response "every_2_weeks"
                         add_response 1083.20
+                        add_response "5"
                         add_response "usual_paydates"
                         assert_current_node :when_is_your_employees_next_pay_day?
                       end
@@ -289,6 +290,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                       should "ask for the next pay date if pay frequency is every 4 weeks" do
                         add_response "every_4_weeks"
                         add_response 1083.20
+                        add_response "2"
                         add_response "usual_paydates"
                         assert_current_node :when_is_your_employees_next_pay_day?
                       end
@@ -504,6 +506,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                       context "answer 2601.60" do
                         setup do
                           add_response "2601.60"
+                          add_response "4"
                           add_response "weekly_starting"
                         end
 
@@ -527,6 +530,21 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                       context "answer 2100.80" do
                         setup do
                           add_response "2100.80"
+                          add_response "2"
+                          add_response "weekly_starting"
+                        end
+
+                        should "calculate the dates and payment amounts" do
+                          assert_state_variable "average_weekly_earnings", 262.60
+                          assert_state_variable "smp_a", "236.34"
+                          assert_state_variable "smp_b", "135.45" # Uses the statutory maternity rate
+                        end
+                      end
+
+                      context "answer 2100.80" do
+                        setup do
+                          add_response "2100.80"
+                          add_response "2"
                           add_response "weekly_starting"
                         end
 
@@ -740,6 +758,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
         add_response Date.parse("2013-10-25")
         add_response :every_2_weeks
         add_response 880
+        add_response "4"
         add_response "usual_paydates"
         add_response Date.parse('2014-01-17')
       end

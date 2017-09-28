@@ -23,7 +23,7 @@ Proof of pregnancy | Usually within 21 days of the SMP start date (or as soon as
 
 Date | SMP amount
 -|-
-1 January 2018|£48.22
+1 January 2018|£48.21
 8 January 2018|£337.50
 15 January 2018|£337.50
 22 January 2018|£337.50
@@ -63,7 +63,7 @@ Date | SMP amount
 17 September 2018|£140.98
 24 September 2018|£140.98
 1 October 2018|£120.84
-| **Total SMP: £6,677.35**
+| **Total SMP: £6,677.34**
 
 *[SMP]: Statutory Maternity Pay
 
