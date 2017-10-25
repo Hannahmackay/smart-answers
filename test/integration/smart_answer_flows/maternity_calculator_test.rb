@@ -251,7 +251,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                                 assert_state_variable "average_weekly_earnings", 135.4
                                 assert_state_variable "smp_a", "121.86"
                                 assert_state_variable "smp_b", "121.86"
-                                assert_state_variable "total_smp", "4752.93"
+                                assert_state_variable "total_smp", "4752.54"
                               end
                             end
                           end
@@ -490,7 +490,7 @@ class MaternityCalculatorTest < ActiveSupport::TestCase
                           assert_state_variable "pay_end_date", 39.weeks.since(leave_start) - 1
                           assert_state_variable "smp_a", "121.86"
                           assert_state_variable "smp_b", "121.86"
-                          assert_state_variable "total_smp", "4752.93"
+                          assert_state_variable "total_smp", "4752.54"
                         end
                       end
                     end
